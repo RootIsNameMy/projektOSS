@@ -1,0 +1,50 @@
+<ion-header #header>
+  <ion-navbar>
+    <ion-title>
+      <span id="title">Podrobnosti</span>
+    </ion-title>
+    <ion-buttons end>
+      <button *ngIf="result!=NULL" (click)="SetFavorite()" ion-button icon-only>
+        <ion-icon [name]="info.favorite"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="Refresh($event)">
+    <ion-refresher-content>
+      
+    </ion-refresher-content>
+  </ion-refresher>
+  <div id="padding" *ngIf="result!=NULL">
+    <h2><span>naslov</span></h2>
+    <h1 class="title">{{info.naslov}}</h1>
+    <h2><span>avtor</span></h2>
+    <h1 class="sub-title">{{info.avtor}}</h1>
+    <h2 *ngIf="info.mentor!=''"><span>mentor</span></h2>
+    <h1 *ngIf="info.mentor!=''" class="sub-title">{{info.mentor}}</h1>
+    <h2><span>jezik</span></h2>
+    <h1 class="sub-sub-title">{{info.jezik}}</h1>
+    <h2><span>vrsta gradiva</span></h2>
+    <h1 class="sub-sub-title">{{info.vg}}</h1>
+    <h2 *ngIf="info.tip!='Ni določena'"><span>tipologija</span></h2>
+    <h1 *ngIf="info.tip!='Ni določena'" class="sub-sub-title">{{info.tip}}</h1>
+    <h2><span>organizacija</span></h2>
+    <h1 class="sub-sub-title">{{info.org}}</h1>
+    <h2 *ngIf="info.opis!=''"><span>opis</span></h2>
+    <h1 *ngIf="info.opis!=''" class="text">{{info.opis}}</h1>
+    <h2 *ngIf="info.kb!=''"><span>ključne besede</span></h2>
+    <h1 *ngIf="info.kb!=''" class="text">{{info.kb}}</h1>
+    <h2><span>datum</span></h2>
+    <h1 class="sub-sub-title">{{info.datum}}</h1>
+    <h2><span>število ogledov</span></h2>
+    <h1 class="sub-sub-title">{{info.so}}</h1>
+    <h2><span>število prenosov</span></h2>
+    <h1 class="sub-sub-title">{{info.sp}}</h1>
+
+  </div>
+</ion-content>
+<ion-footer>
+    <button ion-button *ngIf="result.Datoteke.length!=0" full (click)="GetDocClick()">Get doc</button>
+</ion-footer>

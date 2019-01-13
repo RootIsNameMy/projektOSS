@@ -1,0 +1,49 @@
+#padding h1, h2 {
+  margin: 0;
+  padding: 0;
+}
+#padding h2 {
+  opacity: 0.75;
+  color: #e12a26;
+  font-size: 15px;
+}
+
+#padding h2:not(:first-child) {
+  padding-top: 20px;
+}
+#padding .title {
+  font-size: 22px;
+  color: #111;
+}
+
+.sub-title {
+  font-size: 20px;
+  color: #111;
+}
+.sub-sub-title {
+  font-size: 18px;
+  color: #111;
+}
+.text{
+  font-size: 16px;
+  color: #111;
+}
+#padding{
+  padding: 20px;
+}
+
+#favorite{
+  position: absolute;
+  top: 0;
+  right: 5px;
+  height: max-content;
+  width: 40px;
+  max-height: 100%;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+
+}
+#favorite ion-icon::before{
+  font-size: 30px;
+}

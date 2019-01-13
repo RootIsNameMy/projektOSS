@@ -1,0 +1,244 @@
+#title {
+  text-transform:capitalize;
+}
+#page-menu-button  {
+  border-top-left-radius: 0;
+ border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0;
+}
+#scroll-wraper {
+  //margin-top: 38px; //38px
+  height: calc(100vh - 10px);
+  margin-bottom: 10px;
+  display: block;
+  overflow: scroll;
+  //margin-bottom: 37px;
+  transition: 0.3s ease;
+
+}
+#scroll-wraper > div {
+  height: max-content;
+ 
+}
+ion-slide{
+  overflow:hidden;
+  position:relative;
+}
+
+//----Browse----//
+
+
+
+
+#browse-list {
+  padding: 0;
+  margin: 0;
+}
+#browse-list li {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  position: relative;
+  padding: 25px 10px 25px 10px;
+  position: relative;
+}
+#browse-list li:nth-child(2n) {
+  background: #fafafa;
+  z-index: 1;
+  box-shadow: 0 0 2px 0px rgba(0,0,0,0.25);
+}
+#browse-list li:not(:last-child){
+  
+}
+#browse-list h1 {
+  margin: 0;
+  padding: 0;
+}
+.title-list {
+  font-size: 17px;
+  height: 56px;
+  
+  line-height: 18px;
+  overflow: hidden;
+
+  width: 100%;
+}
+
+.date-list {
+  position: absolute;
+  font-size: 11px;
+  bottom: 7px;
+  right: 10px;
+  color: #888;
+}
+
+.organization-list {
+  position: absolute;
+  font-size: 13px;
+  top: 7px;
+  left: 10px;
+  color: #e12a26;
+  text-transform: capitalize;
+}
+.author-list {
+  position: absolute;
+  font-size: 11px;
+  bottom: 7px;
+  left: 10px;
+  color: #888;
+}
+
+.lang-list {
+  position: absolute;
+  font-size: 13px;
+  top: 7px;
+  right: 10px;
+  color: #e12a26;
+  text-transform: capitalize;
+}
+
+ion-slides{
+  position: fixed;
+  top: 0;
+}
+.button-full-md {
+  margin: 0;
+}
+
+//-----Shelf------//
+#shelf-list{
+  margin:0;
+  padding:0;
+  list-style: 0;
+}
+.shelf {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  //padding: 25px 10px 25px 10px;
+  height: min-content;
+}
+.shelf h1 {
+  margin: 0;
+  
+}
+.shelf-title {
+  
+  background: #eee;
+  z-index: 2;
+  box-shadow: 0 0 4px 1px rgba(0,0,0,0.25);
+  text-align: left;
+  padding: 2px 10px 2px 10px; 
+}
+.item-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.item-s:nth-child(2n) {
+  background: #fafafa;
+  z-index: 1;
+  box-shadow: 0 0 2px 0px rgba(0,0,0,0.25);
+}
+.item-s {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  padding: 25px 50px 25px 10px;
+}
+.title-item {
+  padding: 0;
+  font-size: 17px;
+  height: 38px;
+  line-height: 18px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.date-item {
+  padding: 0;
+  position: absolute;
+  font-size: 11px;
+  bottom: 7px;
+  right: 10px;
+  color: #888;
+}
+
+.organization-item {
+  padding: 0;
+  position: absolute;
+  font-size: 13px;
+  top: 7px;
+  left: 10px;
+  color: #e12a26;
+  text-transform: capitalize;
+}
+
+.author-item {
+  padding: 0;
+  position: absolute;
+  font-size: 11px;
+  bottom: 7px;
+  left: 10px;
+  color: #888;
+}
+.more-icon{
+  position: absolute;
+  right: -5px;
+  top: -8px;
+  
+  margin: auto;
+  height: 64px;
+  width: 58px;
+
+}
+.more-icon > button  {
+  border: none;
+  border-width: 0px;
+}
+.more-icon >button>span{
+  border: none;
+  border-width: 0px;
+}
+.more-icon::before{
+  font-size: 40px;
+}
+.select{
+  //position: relative;
+}
+//----Search input----//
+#simple-search {
+  margin-bottom: 20px;
+}
+#simple-search > ion-toolbar{
+  box-shadow: 0 0 4px 1px rgba(0,0,0,0.25);
+}
+.click-shelf-handler{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+#advanced-search {
+  margin-bottom: 20px;
+}
+
+#advanced-search > ion-toolbar {
+  box-shadow: 0 0 2px 1px rgba(0,0,0,0.25);
+}
+
+#browse {
+  margin-bottom: 20px;
+}
+
+#browse > ion-toolbar {
+  box-shadow: 0 0 2px 1px rgba(0,0,0,0.25);
+}
+
+#shelf-list ion-toolbar {
+  box-shadow: 0 0 2px 1px rgba(0,0,0,0.25);
+}
+
+
+

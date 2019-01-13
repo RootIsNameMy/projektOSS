@@ -1,0 +1,241 @@
+<ion-header #header>
+  <ion-navbar>
+    <ion-title>
+      <span id="title">{{pageName}}</span>
+    </ion-title>
+    <ion-buttons end>
+      <ion-spinner *ngIf="gettingPage>0" name="bubbles" color="primary"></ion-spinner>
+    </ion-buttons>
+  </ion-navbar>
+ 
+</ion-header>
+
+<ion-content>
+  <ion-slides  #slider (ionSlideDidChange)="slideChanged()">
+    <ion-slide>
+      <div #scrollWraper2 id="scroll-wraper">
+        <div>
+          <ul #shelfList id="shelf-list">
+            <li class="shelf" *ngFor="let shelf of storedItems" >
+              <ion-toolbar>
+                  <ion-title>{{shelf.title}}</ion-title>
+                  <ion-buttons end>
+                    <button (click)="ListEdit(shelf)" ion-button icon-only>
+                      <ion-icon name="md-settings"></ion-icon>
+                    </button>
+                  </ion-buttons>
+                </ion-toolbar>
+                <ul class="item-list">
+                  <li class="item-s" *ngFor="let item of shelf.result">
+                    <h1 class="title-item">{{ item.title }}</h1>
+                    <h1 class="organization-item">{{ item.organization }}</h1>
+                    <h1 class="date-item">{{ item.date }}</h1>
+                    <h1 class="author-item">{{ item.author }}</h1>
+                    <h1 class="lang-item">{{ item.lang }}</h1>
+                    <div (click)="ItemDetails(item)" class="click-shelf-handler"></div>
+                    <div class="more-icon" name="ios-list">
+                      <button outline large (click)="MoveItem(item,shelf)" ion-button icon-only>
+                        <ion-icon name="ios-list"></ion-icon>
+                      </button>
+                    </div>
+
+
+
+
+                  </li>
+                </ul>
+              </li>
+          </ul>
+          
+
+        </div>
+        </div>
+    </ion-slide>
+    <ion-slide>
+      <div #scrollWraper1 id="scroll-wraper">
+        <div>
+
+          <div #simpleSearch id="simple-search">
+            <ion-toolbar>
+              <ion-title>Enostavno iskanje</ion-title>
+              <ion-buttons end>
+                <button [disabled]="gettingPage>0||searchButtonDisabled" (click)="SimpleSearchClick()" ion-button icon-only>
+                  <ion-icon name="md-search"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-toolbar>
+            <ion-item>
+              <ion-label color="primary" floating>Iskalni niz</ion-label>
+              <ion-input [(ngModel)]="ssSearchVal"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Isci po</ion-label>
+              <ion-select [(ngModel)]="ssSelectedVal" [selectOptions]="{title: 'Search parameter'}" value="dk">
+
+                <ion-option name="faculty" *ngFor="let item of ssOptions" value="{{item.val}}">
+                  {{item.title}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Zadetki s celotnim besedilom</ion-label>
+              <ion-checkbox [(ngModel)]="ssCheckVal"></ion-checkbox>
+            </ion-item>
+
+          </div>
+
+          <div #browse id="browse">
+            <ion-toolbar>
+              <ion-title>Brskanje</ion-title>
+              <ion-buttons end>
+                <button [disabled]="gettingPage>0||searchButtonDisabled" (click)=" BrowseClick()" ion-button icon-only>
+                  <ion-icon name="md-search"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-toolbar>
+
+            <ion-item>
+              <ion-label>Stopnja 1</ion-label>
+              <ion-select (ngModelChange)="BrowseCat1Change($event)" [(ngModel)]="browseCat1Val" [selectOptions]="{title: 'Search parameter'}">
+
+                <ion-option *ngFor="let item of browseCat1" value="{{item.val}}">
+                  {{item.title}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item *ngIf="browseCat2Visible">
+              <ion-label>Stopnja 2</ion-label>
+              <ion-select (ngModelChange)="BrowseCat2Change($event)" [(ngModel)]="browseCat2Val" [selectOptions]="{title: 'Search parameter'}">
+
+                <ion-option *ngFor="let item of browseCat2" value="{{item.val}}">
+                  {{item.title}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item *ngIf="browseCat3Visible">
+              <ion-label>Stopnja 3</ion-label>
+              <ion-select [(ngModel)]="browseCat3Val" [selectOptions]="{title: 'Search parameter'}">
+
+                <ion-option *ngFor="let item of browseCat3" value="{{item.val}}">
+                  {{item.title}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+
+
+          </div>
+          <div #advancedSearch id="advanced-search">
+            <ion-toolbar>
+              <ion-title>Napredno iskanje</ion-title>
+              <ion-buttons end>
+                <button [disabled]="gettingPage>0||searchButtonDisabled" (click)="AdvancedSearchClick()" ion-button icon-only>
+                  <ion-icon name="md-search"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-toolbar>
+
+            <div *ngFor="let i of [0,1,2,3]">
+              <ion-item>
+                <ion-label stacked color="primary">Iskalni niz</ion-label>
+                <ion-input [(ngModel)]="advancedSearchVal[i].val"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Isci po</ion-label>
+                <ion-select [(ngModel)]="advancedSearchVal[i].col" [selectOptions]="{title: 'Search parameter'}" value="dk">
+
+                  <ion-option name="faculty" *ngFor="let item of advancedSearchCol" value="{{item[0]}}">
+                    {{item[1]}}
+                  </ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="i<3">
+                <ion-select [(ngModel)]="advancedSearchVal[i+1].op" [selectOptions]="{title: 'Search parameter'}" value="dk">
+
+                  <ion-option name="faculty" *ngFor="let item of advancedSearchOp" value="{{item[0]}}">
+                    {{item[1]}}
+                  </ion-option>
+                </ion-select>
+              </ion-item>
+
+            </div>
+            <ion-item>
+              <ion-label stacked>Vrsta gradiv: </ion-label>
+              <ion-select [(ngModel)]="advancedSearchOtherVal.vg" [selectOptions]="{title: 'Search parameter'}" value="dk">
+
+                <ion-option name="faculty" *ngFor="let item of advancedSearchVG" value="{{item[0]}}">
+                  {{item[1]}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Jezik:</ion-label>
+              <ion-select [(ngModel)]="advancedSearchOtherVal.lang" [selectOptions]="{title: 'Search parameter'}" value="dk">
+
+                <ion-option name="faculty" *ngFor="let item of advancedSearchLang" value="{{item[0]}}">
+                  {{item[1]}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Isci po: </ion-label>
+              <ion-select [(ngModel)]="advancedSearchOtherVal.ip" [selectOptions]="{title: 'Search parameter'}" value="dk">
+
+                <ion-option name="faculty" *ngFor="let item of advancedSearchIP" value="{{item[0]}}">
+                  {{item[1]}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+
+
+            <ion-item>
+              <ion-label>Zadetki s celotnim besedilom</ion-label>
+              <ion-checkbox [(ngModel)]="advancedSearchFull"></ion-checkbox>
+            </ion-item>
+
+
+          </div>
+
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+
+      <div #scrollWraper  id="scroll-wraper" >
+        <div>
+          <ul id="browse-list">
+
+            <li color="primary" *ngFor="let item of items" (click)="ItemDetails(item)">
+              <h1 class="title-list">{{ item.title }}</h1>
+              <h1 class="organization-list">{{ item.organization }}</h1>
+              <h1 class="date-list">{{ item.date }}</h1>
+              <h1 class="author-list">{{ item.author }}</h1>
+              <h1 class="lang-list">{{ item.lang }}</h1>
+            </li>
+
+          </ul>
+         
+        </div>
+
+      </div>
+      
+    </ion-slide>
+  </ion-slides>
+  
+</ion-content>
+<ion-footer #footer>
+ 
+    <ion-segment id="page-menu"  [(ngModel)]="pageName" color="primary">
+      <ion-segment-button id="page-menu-button" value="home" (click)="selectedTab(0)">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button id="page-menu-button" value="search" (click)="selectedTab(1)">
+        <ion-icon name="search"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button id="page-menu-button" value="browse" (click)="selectedTab(2)">
+        <ion-icon name="list"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  
+</ion-footer>
